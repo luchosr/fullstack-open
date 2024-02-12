@@ -1,6 +1,7 @@
 import Part from './Part';
 
 const Content = ({ parts }) => {
+  console.log('The parts are: ', parts);
   return (
     <div>
       {parts.map((part) => (
