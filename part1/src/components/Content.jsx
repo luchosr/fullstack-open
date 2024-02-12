@@ -1,7 +1,13 @@
 import Part from './Part';
 
 const Content = ({ parts }) => {
-  parts.map((part) => console.log(part.name));
+  return (
+    <div>
+      {parts.map((part) => (
+        <Part name={part.name} exercises={part.exercises} key={part.name} />
+      ))}
+    </div>
+  );
 };
 
 export default Content;
