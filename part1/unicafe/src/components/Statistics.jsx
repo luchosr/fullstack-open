@@ -7,20 +7,22 @@ const Statistics = ({ good, bad, neutral }) => {
       {good + bad + neutral === 0 ? (
         <h3>No feedback given</h3>
       ) : (
-        <div>
-          <StatisticLine text="good" value={good} />
-          <StatisticLine text="bad" value={bad} />
-          <StatisticLine text="neutral" value={neutral} />
-          <StatisticLine text="All" value={good + neutral + bad} />
-          <StatisticLine
-            text="Average"
-            value={(good - bad) / (good + neutral + bad) || 0}
-          />
-          <StatisticLine
-            text="Positive %:"
-            value={good / (good + neutral + bad) || 0}
-          />
-        </div>
+        <table>
+          <tbody>
+            <StatisticLine text="good" value={good} />
+            <StatisticLine text="bad" value={bad} />
+            <StatisticLine text="neutral" value={neutral} />
+            <StatisticLine text="All" value={good + neutral + bad} />
+            <StatisticLine
+              text="Average"
+              value={(good - bad) / (good + neutral + bad) || 0}
+            />
+            <StatisticLine
+              text="Positive %:"
+              value={good / (good + neutral + bad) || 0}
+            />
+          </tbody>
+        </table>
       )}
     </>
   );
