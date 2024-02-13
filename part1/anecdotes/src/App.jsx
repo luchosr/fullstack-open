@@ -14,6 +14,17 @@ const App = () => {
 
   const [selected, setSelected] = useState(0);
 
+  const [points, setPoints] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
+
+  // let points = [0, 0, 0, 0, 0, 0, 0, 0];
+
+  let copy = [...points];
+
+  const voteAnecdote = () => {
+    copy[selected] += 1;
+    setPoints([...copy]);
+  };
+
   const getRandomAnecdote = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomIndex);
@@ -22,6 +33,8 @@ const App = () => {
   return (
     <>
       <div>{anecdotes[selected]}</div>
+      <div>has {copy[selected]} votes</div>
+      <button onClick={voteAnecdote}>vote</button>
       <button onClick={getRandomAnecdote}>next anecdote</button>
     </>
   );
