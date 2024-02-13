@@ -16,13 +16,16 @@ const App = () => {
 
   const [points, setPoints] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
 
-  // let points = [0, 0, 0, 0, 0, 0, 0, 0];
+  const [maxNumberIndex, setmaxNumberIndex] = useState(0);
 
   let copy = [...points];
 
   const voteAnecdote = () => {
     copy[selected] += 1;
     setPoints([...copy]);
+    let maxNumber = Math.max(...points);
+    let aux = points.indexOf(maxNumber);
+    setmaxNumberIndex(aux);
   };
 
   const getRandomAnecdote = () => {
@@ -32,10 +35,17 @@ const App = () => {
 
   return (
     <>
-      <div>{anecdotes[selected]}</div>
-      <div>has {copy[selected]} votes</div>
+      <h1>Anecdote of the day</h1>
+
+      <p> {anecdotes[selected]}</p>
+      <p>has {copy[selected]} votes</p>
       <button onClick={voteAnecdote}>vote</button>
       <button onClick={getRandomAnecdote}>next anecdote</button>
+
+      <h2>Anecdote with most votes</h2>
+
+      <div> {anecdotes[maxNumberIndex]}</div>
+      <div>has {copy[maxNumberIndex]} votes</div>
     </>
   );
 };
