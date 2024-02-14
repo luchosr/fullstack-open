@@ -2,19 +2,25 @@ import { useState } from 'react';
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', id: 1, number: '0800666518' },
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 },
   ]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
+  const [filterValue, setFilterValue] = useState('');
 
   const handleNameInput = (event) => {
-    console.log(event.target.value);
     setNewName(event.target.value);
   };
 
   const handleNumberInput = (event) => {
-    console.log(event.target.value);
     setNewNumber(event.target.value);
+  };
+
+  const handleFilterInput = (event) => {
+    setFilterValue(event.target.value);
   };
 
   const addPerson = (event) => {
@@ -34,12 +40,19 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <h3>
+        Filter shown with{' '}
+        <input value={filterValue} onChange={handleFilterInput} />
+      </h3>
       <form>
         <div>
-          name: <input value={newName} onChange={handleNameInput} />
+          name:{' '}
+          <input type="string" value={newName} onChange={handleNameInput} />
         </div>
         <div>
-          number: <input value={newNumber} onChange={handleNumberInput} />
+          number:{' '}
+          <input type="string" value={newNumber} onChange={handleNumberInput} />
         </div>
         <div>
           <button type="submit" onClick={addPerson}>
@@ -48,11 +61,14 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map((person) => (
-        <p key={person.id}>
-          {person.name} {person.number}
-        </p>
-      ))}
+      {persons.map(
+        (person) =>
+          person.name.includes(filterValue) && (
+            <p key={person.id}>
+              {person.name} {person.number}
+            </p>
+          )
+      )}
     </div>
   );
 };
