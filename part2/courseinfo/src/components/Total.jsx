@@ -1,12 +1,5 @@
-import React from 'react';
-
-const Total = ({ parts }) => {
-  return (
-    <strong>
-      Total of {parts[0].exercises + parts[1].exercises + parts[2].exercises}{' '}
-      exercises.
-    </strong>
-  );
+const Total = ({ total }) => {
+  return <strong>Total of {total} exercises.</strong>;
 };
 
 export default Total;
