@@ -1,26 +1,23 @@
 import { useState, useEffect } from 'react';
-import { getAll, create } from './services/Phones';
-import axios from 'axios';
+import { getAll, create, deleteOne } from './services/Phones';
+
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-
-  useEffect(() => {
-    console.log('effect');
-
-    const eventHandler = (response) => {
-      console.log('promise fulfilled');
-      setPersons(response.data);
-    };
-
-    getAll().then(eventHandler);
-  }, []);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [filterValue, setFilterValue] = useState('');
+
+  useEffect(() => {
+    getAll().then(eventHandler);
+  }, []);
+
+  const eventHandler = (response) => {
+    setPersons(response.data);
+  };
 
   const handleNameInput = (event) => {
     setNewName(event.target.value);
@@ -54,6 +51,17 @@ const App = () => {
     setNewName('');
   };
 
+  const deletePerson = (personToDelete) => {
+    if (window.confirm(`Quieres borrar a ${personToDelete.name} ??`)) {
+      deleteOne(personToDelete.id);
+
+      let newPersonsArray = persons.filter(
+        (person) => person.id !== personToDelete.id
+      );
+      setPersons(newPersonsArray);
+    }
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -68,7 +76,11 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons persons={persons} filterValue={filterValue} />
+      <Persons
+        persons={persons}
+        filterValue={filterValue}
+        handleDelete={deletePerson}
+      />
     </div>
   );
 };

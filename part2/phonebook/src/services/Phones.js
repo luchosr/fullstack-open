@@ -9,6 +9,10 @@ export const create = (newObject) => {
   return axios.post(baseUrl, newObject);
 };
 
-const update = (id, newObject) => {
+export const deleteOne = (id) => {
+  return axios.delete(`${baseUrl}/${id}`);
+};
+
+export const update = (id, newObject) => {
   return axios.put(`${baseUrl}/${id}`, newObject);
 };
