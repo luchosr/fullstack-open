@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAll, create, deleteOne } from './services/Phones';
+import { getAll, create, deleteOne, update } from './services/Phones';
 
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
@@ -36,29 +36,56 @@ const App = () => {
     const nameObject = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1,
+      id: (persons.length + 1).toString(),
     };
 
-    if (persons.find((person) => person.name === nameObject.name)) {
+    if (
+      persons.find(
+        (person) =>
+          person.name === nameObject.name && person.number === nameObject.number
+      )
+    ) {
       alert(`${newName} is already added to phonebook`);
+    } else if (
+      persons.find(
+        (person) =>
+          person.name === nameObject.name && person.number !== nameObject.number
+      )
+    ) {
+      if (
+        window.confirm(
+          `${newName} is already added to phonebook, replace the old number with a new one?`
+        )
+      ) {
+        const newPersonObject = persons.find(
+          (person) => person.name === nameObject.name
+        );
+        update(newPersonObject.id, {
+          name: newPersonObject.name,
+          number: newNumber,
+          id: newPersonObject.id,
+        }).then(() => {
+          getAll().then(eventHandler);
+        });
+      }
     } else {
       setPersons(persons.concat(nameObject));
       create(nameObject).then((response) => {
         console.log(response);
       });
     }
-
     setNewName('');
   };
 
   const deletePerson = (personToDelete) => {
-    if (window.confirm(`Quieres borrar a ${personToDelete.name} ??`)) {
-      deleteOne(personToDelete.id);
-
-      let newPersonsArray = persons.filter(
-        (person) => person.id !== personToDelete.id
-      );
-      setPersons(newPersonsArray);
+    if (
+      window.confirm(
+        `Do you want to delete ${personToDelete.name} from phonebook ?`
+      )
+    ) {
+      deleteOne(personToDelete.id).then(() => {
+        getAll().then(eventHandler);
+      });
     }
   };
 
