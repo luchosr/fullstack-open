@@ -5,15 +5,21 @@ import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
 
+import './index.css';
+
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [filterValue, setFilterValue] = useState('');
+  const [message, setMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     getAll().then(eventHandler);
   }, []);
+
+  const timeoutTime = 3000;
 
   const eventHandler = (response) => {
     setPersons(response.data);
@@ -64,15 +70,30 @@ const App = () => {
           name: newPersonObject.name,
           number: newNumber,
           id: newPersonObject.id,
-        }).then(() => {
-          getAll().then(eventHandler);
-        });
+        })
+          .then(() => {
+            setMessage(`Updated ${newName}`);
+            setTimeout(() => setMessage(null), timeoutTime);
+          })
+          .then(() => {
+            getAll().then(eventHandler);
+          })
+          .catch((error) => {
+            setErrorMessage(error.message);
+            setTimeout(() => setErrorMessage(null), timeoutTime);
+          });
       }
     } else {
       setPersons(persons.concat(nameObject));
-      create(nameObject).then((response) => {
-        console.log(response);
-      });
+      create(nameObject)
+        .then(() => {
+          setMessage(`Added ${newName}`);
+          setTimeout(() => setMessage(null), timeoutTime);
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+          setTimeout(() => setErrorMessage(null), timeoutTime);
+        });
     }
     setNewName('');
   };
@@ -92,6 +113,9 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+
+      {message && <h1 className="success">{message}</h1>}
+      {errorMessage && <h1 className="error">{errorMessage} </h1>}
       <Filter filterValue={filterValue} handleFilterInput={handleFilterInput} />
 
       <PersonForm

@@ -1,0 +1,11 @@
+.success {
+  color: green;
+  font-style: italic;
+  border: 2px solid green;
+}
+
+.error {
+  color: red;
+  font-style: italic;
+  border: 2px solid red;
+}
