@@ -13,16 +13,14 @@ function App() {
 
   const handleSearchImput = (event) => {
     setSearchValue(event.target.value);
-    updateFilteredCountryArray();
+    updateFilteredCountryArray(event.target.value);
   };
 
-  const updateFilteredCountryArray = () => {
+  const updateFilteredCountryArray = (match) => {
     const countriesToHaveBeenFiltered =
       countries.length > 0
         ? countries.filter((country) =>
-            country.name.common
-              .toLowerCase()
-              .includes(searchValue.toLowerCase())
+            country.name.common.toLowerCase().includes(match.toLowerCase())
           )
         : [];
 
@@ -35,6 +33,13 @@ function App() {
         <input value={searchValue} onChange={handleSearchImput} />
       </div>
       <div className="">
+        {filteredCountries.length <= 10 &&
+          filteredCountries.map((country) => (
+            <p key={country.name.common}>{country.name.common}</p>
+          ))}
+        {filteredCountries.length > 10 && (
+          <p>Too many matches, specify another filter</p>
+        )}
         {filteredCountries.length === 1 && (
           <CountryInfo filteredCountries={filteredCountries} />
         )}
