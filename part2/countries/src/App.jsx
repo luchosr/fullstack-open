@@ -26,6 +26,11 @@ function App() {
 
     setFilteredCountries(countriesToHaveBeenFiltered);
   };
+
+  const handleShowButton = (countryInfo) => {
+    updateFilteredCountryArray(countryInfo);
+  };
+
   return (
     <>
       <div className="">
@@ -33,16 +38,10 @@ function App() {
         <input value={searchValue} onChange={handleSearchImput} />
       </div>
       <div className="">
-        {filteredCountries.length <= 10 &&
-          filteredCountries.map((country) => (
-            <p key={country.name.common}>{country.name.common}</p>
-          ))}
-        {filteredCountries.length > 10 && (
-          <p>Too many matches, specify another filter</p>
-        )}
-        {filteredCountries.length === 1 && (
-          <CountryInfo filteredCountries={filteredCountries} />
-        )}
+        <CountryInfo
+          filteredCountries={filteredCountries}
+          handleShowButton={handleShowButton}
+        />
       </div>
     </>
   );
