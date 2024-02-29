@@ -1,6 +1,18 @@
+import { useEffect, useState } from 'react';
+import { getCapitalWeather } from '../services/Countries';
+
 /* eslint-disable react/prop-types */
 const CountryInfo = ({ filteredCountries, handleShowButton }) => {
+  const [weatherData, setWeatherData] = useState(null);
+
   const firstCountry = filteredCountries[0];
+
+  useEffect(() => {
+    filteredCountries.length === 1 &&
+      getCapitalWeather(filteredCountries[0].capital).then((response) =>
+        setWeatherData(response.data)
+      );
+  }, [filteredCountries]);
 
   return (
     <>
@@ -37,6 +49,22 @@ const CountryInfo = ({ filteredCountries, handleShowButton }) => {
             alt={`${firstCountry.name.common}'s flag`}
             width="20%"
           />
+
+          {weatherData && (
+            <div className="">
+              <h3>Weather in {firstCountry.capital} </h3>
+              <p>
+                Temperature: {((weatherData.main.temp - 32) / 18).toFixed(2)}
+                Celsius
+              </p>
+              <img
+                src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+                alt=""
+              />
+
+              <p>Wind: {weatherData.wind.speed} m/s</p>
+            </div>
+          )}
         </div>
       )}
     </>

@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     getAll().then((response) => setCountries(response.data));
-  }, [searchValue]);
+  }, []);
 
   const handleSearchImput = (event) => {
     setSearchValue(event.target.value);
