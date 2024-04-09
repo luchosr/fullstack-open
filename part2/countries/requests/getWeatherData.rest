@@ -1,0 +1,1 @@
+GET https://api.openweathermap.org/data/2.5/weather?q=London&appid=3a0092722a85b2ac71abb8526297a885
