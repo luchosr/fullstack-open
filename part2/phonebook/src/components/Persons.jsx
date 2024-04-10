@@ -13,7 +13,7 @@ const Persons = ({ persons, filterValue, handleDelete }) => {
           )
       )}
     </>
-  );
-};
+  )
+}
 
-export default Persons;
+export default Persons
