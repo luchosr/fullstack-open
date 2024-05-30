@@ -50,9 +50,36 @@ const mostBlogs = (blogsList) => {
   return { author: topAuthor, blogs: maxBlogs };
 };
 
+const mostLikes = (blogsList) => {
+  if (blogsList.length === 0) return 'there are no blogs on this list';
+
+  const authorLikesCount = {};
+
+  blogsList.forEach((blog) => {
+    if (authorLikesCount[blog.author]) {
+      authorLikesCount[blog.author] += blog.likes;
+    } else {
+      authorLikesCount[blog.author] = blog.likes;
+    }
+  });
+
+  let maxLikes = 0;
+  let topAuthor = '';
+
+  for (const author in authorLikesCount) {
+    if (authorLikesCount[author] > maxLikes) {
+      maxLikes = authorLikesCount[author];
+      topAuthor = author;
+    }
+  }
+
+  return { author: topAuthor, likes: maxLikes };
+};
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
   mostBlogs,
+  mostLikes,
 };
