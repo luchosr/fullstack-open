@@ -44,3 +44,26 @@ describe('GET API blogs', () => {
     assert.strictEqual(response.body[0].id, '5a422a851b54a676234d17f7');
   });
 });
+
+describe('adition of a new blog', () => {
+  test('succeeds with valid data', async () => {
+    const newBlog = {
+      title: 'A new added blog',
+      author: 'Loel',
+      url: 'loel.com',
+      likes: 12,
+    };
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+
+    const blogsAtEnd = await helper.blogsInDB();
+    assert.strictEqual(blogsAtEnd.length, helper.listWithTwoBlogs.length + 1);
+
+    const blogs = blogsAtEnd.map((n) => n.title);
+    assert(blogs.includes('A new added blog'));
+  });
+});
