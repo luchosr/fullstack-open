@@ -15,22 +15,32 @@ beforeEach(async () => {
   await Blog.insertMany(helper.listWithTwoBlogs);
 });
 
-test('blogs are returned as json', async () => {
-  await api
-    .get('/api/blogs')
-    .expect(200)
-    .expect('Content-Type', /application\/json/);
+describe('GET API blogs', () => {
+  test('blogs are returned as json', async () => {
+    await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+  });
+
+  test('all blogs are returned', async () => {
+    const response = await api.get('/api/blogs');
+
+    assert.strictEqual(response.body.length, helper.listWithTwoBlogs.length);
+  });
+
+  test('a specific blog is within the returned blogs', async () => {
+    const response = await api.get('/api/blogs');
+
+    const titles = await response.body.map((e) => e.title);
+    assert(titles.includes('React patterns'));
+  });
+
+  test('a unique identified is named id and it exists', async () => {
+    const response = await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+    assert.strictEqual(response.body[0].id, '5a422a851b54a676234d17f7');
+  });
 });
-
-// test('there are two blogs', async () => {
-//   const response = await api.get('/api/blogs');
-
-//   assert.strictEqual(response.body.length, 2);
-// });
-
-// test('the first Blog  is about React patterns', async () => {
-//   const response = await api.get('/api/blogs');
-
-//   const titles = await response.body.map((e) => e.title);
-//   assert.strictEqual(contents.includes('React patterns'), true);
-// });
