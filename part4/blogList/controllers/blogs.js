@@ -12,7 +12,7 @@ blogsRouter.get('/:id', async (request, response, next) => {
 });
 
 blogsRouter.post('/', (request, response) => {
-  const { title, author, url, likes } = request.body;
+  const { title, author, url, likes = 0 } = request.body;
 
   if (!title) {
     return response.status(400).json({ error: 'title missing' });

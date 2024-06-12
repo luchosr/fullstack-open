@@ -66,4 +66,22 @@ describe('adition of a new blog', () => {
     const blogs = blogsAtEnd.map((n) => n.title);
     assert(blogs.includes('A new added blog'));
   });
+
+  test('if likes property does not exists, likes will be zero', async () => {
+    const newBlog = {
+      title: 'How to  complete FSOpen and not die in the try',
+      author: 'Loel',
+      url: 'loel.com',
+    };
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+
+    const response = await api.get('/api/blogs');
+    const likes = response.body.map((r) => r.likes);
+    assert.strictEqual(likes[likes.length - 1], 0);
+  });
 });
