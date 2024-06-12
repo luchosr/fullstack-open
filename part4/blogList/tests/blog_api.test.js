@@ -84,4 +84,16 @@ describe('adition of a new blog', () => {
     const likes = response.body.map((r) => r.likes);
     assert.strictEqual(likes[likes.length - 1], 0);
   });
+
+  test('fails with status code 400 if data invalid', async () => {
+    const newBlog = {
+      url: 'test.com',
+    };
+
+    await api.post('/api/blogs').send(newBlog).expect(400);
+
+    const blogsAtEnd = await helper.blogsInDB();
+
+    assert.strictEqual(blogsAtEnd.length, helper.listWithTwoBlogs.length);
+  });
 });
