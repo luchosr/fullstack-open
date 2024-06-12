@@ -113,3 +113,24 @@ describe('deletion of a blog', () => {
     assert(!titles.includes(blogToDelete.title));
   });
 });
+
+describe('update of a blog', () => {
+  test('updates the amount of likes', async () => {
+    const blogsAtStart = await helper.blogsInDB();
+    const blogToUpdate = blogsAtStart[0];
+
+    const updatedBlog = {
+      ...blogToUpdate,
+      likes: 17,
+    };
+
+    await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(updatedBlog)
+      .expect(200);
+
+    const blogsAtEnd = await helper.blogsInDB();
+
+    assert.strictEqual(blogsAtEnd[0].likes, 17);
+  });
+});
