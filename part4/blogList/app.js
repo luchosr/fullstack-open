@@ -2,12 +2,15 @@ require('dotenv').config();
 const config = require('./utils/config');
 const logger = require('./utils/logger');
 const middleware = require('./utils/middleware');
+
 const express = require('express');
 const app = express();
 
 const morgan = require('morgan');
 const Blog = require('./models/blog');
+
 const blogsRouter = require('./controllers/blogs');
+const usersRouter = require('./controllers/users');
 
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -22,6 +25,7 @@ app.use(
 );
 
 app.use('/api/blogs', blogsRouter);
+app.use('/api/users', usersRouter);
 
 mongoose.set('strictQuery', false);
 
