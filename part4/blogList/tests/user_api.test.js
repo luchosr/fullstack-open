@@ -96,7 +96,3 @@ describe('when there is initially one user in db', () => {
     assert.deepStrictEqual(usersAtEnd, usersAtStart);
   });
 });
-
-// afterAll(async () => {
-//   await mongoose.connection.close();
-// });

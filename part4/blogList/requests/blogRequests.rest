@@ -7,3 +7,14 @@ Content-Type: application/json
     "url": "www.globalactions.com",
     "likes": 6
   }
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+  
+  {
+    "title": "Testing my blog",
+    "author": "chalestone",
+    "url": "www.globalactions.com",
+    "likes": 6,
+    "userId":"667042b75731e0248f5e1e3a"
+  }
