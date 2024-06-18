@@ -7,14 +7,28 @@ Content-Type: application/json
     "url": "www.globalactions.com",
     "likes": 6
   }
-###
+### 
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
   
   {
-    "title": "Testing my blog",
-    "author": "chalestone",
+    "title": "Testing my Mongoose",
+    "author": "Michael Chan",
     "url": "www.globalactions.com",
     "likes": 6,
-    "userId":"667042b75731e0248f5e1e3a"
+    "userId":"66716a2c7f33c864cce5e0ad"
   }
+
+###  
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+  
+  {
+    "title": "Testing my luchos posts",
+    "author": "Luciano Ramello",
+    "url": "www.luchosr.com",
+    "likes": 6,
+    "userId":"667198ce7e668854c20418c4"
+  }
+
+

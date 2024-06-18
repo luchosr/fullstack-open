@@ -21,17 +21,24 @@ blogsRouter.get('/:id', async (request, response, next) => {
 });
 
 blogsRouter.post('/', async (request, response) => {
-  const { title, author, url, likes = 0, userId } = request.body;
+  const body = request.body;
 
-  if (!title) {
+  const user = await User.findById(body.userId);
+
+  console.log('El user  es: ', user);
+  if (!body.title) {
     return response.status(400).json({ error: 'title missing' });
-  } else if (!author) {
+  } else if (!body.author) {
     return response.status(400).json({ error: 'author missing' });
   }
 
-  const user = await User.findById(userId);
-
-  const blog = new Blog({ title, author, url, likes, userId });
+  const blog = new Blog({
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes || 0,
+    user: user.id,
+  });
   const savedBlog = await blog.save();
 
   user.blogs = user.blogs.concat(savedBlog._id);

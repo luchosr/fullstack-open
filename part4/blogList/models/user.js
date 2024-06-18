@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     minLength: [3, 'Username must be at least 3 characters long'],
     required: true,
-    unique: true, // esto asegura la unicidad de username
+    unique: true,
   },
   name: String,
   passwordHash: String,
@@ -22,7 +22,6 @@ userSchema.set('toJSON', {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
     delete returnedObject.__v;
-    // el passwordHash no debe mostrarse
     delete returnedObject.passwordHash;
   },
 });
