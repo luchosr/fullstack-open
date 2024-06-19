@@ -16,6 +16,7 @@ const loginRouter = require('./controllers/login');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+app.use(middleware.tokenExtractor);
 app.use(cors());
 app.use(express.json());
 

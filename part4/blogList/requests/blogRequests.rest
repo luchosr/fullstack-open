@@ -34,10 +34,10 @@ Content-Type: application/json
 
 POST http://localhost:3003/api/blogs
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y2hvc3IiLCJpZCI6IjY2NzE5OGNlN2U2Njg4NTRjMjA0MThjNCIsImlhdCI6MTcxODc4NzQ1NCwiZXhwIjoxNzE4NzkxMDU0fQ.20N7Sj6Id_YEaw08tJjfA-aHd9daZY6tIqv0lxNrsTw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y2hvc3IiLCJpZCI6IjY2NzE5OGNlN2U2Njg4NTRjMjA0MThjNCIsImlhdCI6MTcxODc5NjIzOCwiZXhwIjoxNzE4Nzk5ODM4fQ.yK_1Mww9JSQSXTv1bLV0vFtOcdty-HlQDNbEs2bOxu0
 
 {
-    "title": "Token Auth is important",
+    "title": "Token extractor testing is important",
     "author": "Luciano Ramello",
     "url": "www.luchosr.com",
     "likes": 6,
