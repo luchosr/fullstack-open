@@ -30,5 +30,17 @@ Content-Type: application/json
     "likes": 6,
     "userId":"667198ce7e668854c20418c4"
   }
+###
 
+POST http://localhost:3003/api/blogs
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y2hvc3IiLCJpZCI6IjY2NzE5OGNlN2U2Njg4NTRjMjA0MThjNCIsImlhdCI6MTcxODc4NzQ1NCwiZXhwIjoxNzE4NzkxMDU0fQ.20N7Sj6Id_YEaw08tJjfA-aHd9daZY6tIqv0lxNrsTw
+
+{
+    "title": "Token Auth is important",
+    "author": "Luciano Ramello",
+    "url": "www.luchosr.com",
+    "likes": 6,
+    "userId":"667198ce7e668854c20418c4"
+  }
 

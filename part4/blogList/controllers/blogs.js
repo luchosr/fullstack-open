@@ -28,7 +28,6 @@ blogsRouter.post('/', async (request, response) => {
   }
   const user = await User.findById(decodedToken.id);
 
-  console.log('El user  es: ', user);
   if (!body.title) {
     return response.status(400).json({ error: 'title missing' });
   } else if (!body.author) {
