@@ -34,6 +34,7 @@ const tokenExtractor = async (request, response, next) => {
     request.token = authorization.replace('Bearer ', '');
   }
 
+  console.log('el request de auth es: ', request);
   next();
 };
 

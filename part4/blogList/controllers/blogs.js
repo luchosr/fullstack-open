@@ -42,12 +42,25 @@ blogsRouter.post('/', async (request, response) => {
   response.status(201).json(savedBlog);
 });
 
-blogsRouter.delete('/:id', (request, response, next) => {
-  Blog.findByIdAndDelete(request.params.id)
-    .then((result) => {
-      response.status(204).end();
-    })
-    .catch((error) => next(error));
+blogsRouter.delete('/:id', async (request, response, next) => {
+  try {
+    const decodedToken = jwt.verify(request.token, process.env.SECRET);
+
+    const blog = Blog.findById(request.params.id);
+
+    if (blog.user.toString() !== decodedToken.id) {
+      return response
+        .status(400)
+        .json({ error: 'this blog can only be removed by the author.' });
+    }
+
+    await Blog.findByIdAndDelete(request.params.id);
+
+    response.status(204).end();
+  } catch (exception) {
+    console.log(exception);
+    response.status(400).json({ error: 'the ID is not found' });
+  }
 });
 
 blogsRouter.put('/:id', (request, response, next) => {

@@ -44,3 +44,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y
     "userId":"667198ce7e668854c20418c4"
   }
 
+###
+DELETE http://localhost:3003/api/blogs/667199507e668854c20418c9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y2hvc3IiLCJpZCI6IjY2NzE5OGNlN2U2Njg4NTRjMjA0MThjNCIsImlhdCI6MTcxODgxMjAwNCwiZXhwIjoxNzE4ODE1NjA0fQ.4psWGpkMcHSpN3uBfMCqyx1iWR-KPRwOezhf0CcsypI
