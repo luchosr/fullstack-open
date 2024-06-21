@@ -26,8 +26,8 @@ const App = () => {
         username,
         password,
       });
+      window.localStorage.setItem('loggedBlogListUser', JSON.stringify(user));
       setUser(user);
-      console.log('el user es: ', user);
       setUsername('');
       setPassword('');
     } catch (exception) {
@@ -36,6 +36,11 @@ const App = () => {
         setErrorMessage(null);
       }, 5000);
     }
+  };
+
+  const logout = () => {
+    window.localStorage.removeItem('loggedBlogListUser');
+    setUser(null);
   };
 
   const loginForm = () => (
@@ -68,9 +73,10 @@ const App = () => {
   const blogList = () => (
     <div>
       <h2>blogs</h2>
-
-      <h4>{user.name} has logged in</h4>
-
+      <h4>{user.name} has logged in</h4>{' '}
+      <button type="button" onClick={() => logout()}>
+        log out
+      </button>
       {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
       ))}
