@@ -73,7 +73,7 @@ const App = () => {
   const blogList = () => (
     <div>
       <h2>blogs</h2>
-      <h4>{user.name} has logged in</h4>{' '}
+      <h4>{user.name} has logged in</h4>
       <button type="button" onClick={() => logout()}>
         log out
       </button>
