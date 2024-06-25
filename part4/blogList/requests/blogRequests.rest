@@ -34,8 +34,7 @@ Content-Type: application/json
 
 POST http://localhost:3003/api/blogs
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y2hvc3IiLCJpZCI6IjY2NzE5OGNlN2U2Njg4NTRjMjA0MThjNCIsImlhdCI6MTcxODg3MzE2OCwiZXhwIjoxNzE4ODc2NzY4fQ.0zHMsBsbcroFhZzN3Iy6EsoGhiU1J4dx6HaUSx723qA
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y2hvc3IiLCJpZCI6IjY2NzE5OGNlN2U2Njg4NTRjMjA0MThjNCIsImlhdCI6MTcxOTIzNjI0NywiZXhwIjoxNzE5MjM5ODQ3fQ.7_g7KP9YynX4WjRfS0T6D-lMQkejs1Bwv35MhkeR0-Q
 {
     "title": "User extractor post",
     "author": "Luciano Ramello",
