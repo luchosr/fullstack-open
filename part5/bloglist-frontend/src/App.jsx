@@ -8,7 +8,7 @@ import loginService from './services/login';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [newBlog, setNewBlog] = useState(false);
+  const [newBlog, setNewBlog] = useState(null);
   const [newBlogTitle, setNewBlogTitle] = useState('');
   const [newBlogAuthor, setNewBlogAuthor] = useState('');
   const [newBlogUrl, setNewBlogUrl] = useState('');
@@ -49,12 +49,14 @@ const App = () => {
       setPassword('');
     } catch (exception) {
       setErrorMessage('Wrong credentials');
+
       setTimeout(() => {
         setErrorMessage(null);
       }, 5000);
     }
   };
 
+  const Notification = (message) => <div>{message}</div>;
   const logout = () => {
     window.localStorage.removeItem('loggedBlogListUser');
     setUser(null);
@@ -63,6 +65,7 @@ const App = () => {
   const loginForm = () => (
     <div>
       <h2>Log in to application</h2>
+      {errorMessage ? Notification(errorMessage) : ''}
       <form onSubmit={handleLogin}>
         <div>
           username
@@ -90,6 +93,12 @@ const App = () => {
   const blogList = () => (
     <div>
       <h2>blogs</h2>
+
+      {newBlog
+        ? Notification(
+            `a new blog ${newBlog.title} by ${newBlog.author} has been added`
+          )
+        : ''}
       <h4>{user.name} has logged in</h4>
       <button type="button" onClick={() => logout()}>
         log out
@@ -106,7 +115,19 @@ const App = () => {
               url: newBlogUrl,
             })
             .then(() => blogService.getAll())
-            .then((blogs) => setBlogs(blogs));
+            .then((blogs) => setBlogs(blogs))
+            .then(() =>
+              setNewBlog({
+                title: newBlogTitle,
+                author: newBlogAuthor,
+                url: newBlogUrl,
+              })
+            )
+            .then(() =>
+              setTimeout(() => {
+                setNewBlog(null);
+              }, 5000)
+            );
         }}
       >
         <div>
