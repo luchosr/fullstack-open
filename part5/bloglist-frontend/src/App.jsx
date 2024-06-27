@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Blog from './components/Blog';
+import NewBlogForm from './components/NewBlogForm';
 import Notification from './components/Notification';
 
 import blogService from './services/blogs';
@@ -9,18 +10,11 @@ import loginService from './services/login';
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [newBlog, setNewBlog] = useState(null);
-  const [newBlogTitle, setNewBlogTitle] = useState('');
-  const [newBlogAuthor, setNewBlogAuthor] = useState('');
-  const [newBlogUrl, setNewBlogUrl] = useState('');
   const [toggleBlogForm, setToggleBlogForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
-
-  const getAllBlogs = () => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
-  };
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -56,7 +50,6 @@ const App = () => {
     }
   };
 
-  const Notification = (message) => <div>{message}</div>;
   const logout = () => {
     window.localStorage.removeItem('loggedBlogListUser');
     setUser(null);
@@ -90,6 +83,29 @@ const App = () => {
     </div>
   );
 
+  const handleNewBlogSubmit = (title, author, url) => {
+    blogService
+      .create({
+        title: title,
+        author: author,
+        url: url,
+      })
+      .then(() => blogService.getAll())
+      .then((blogs) => setBlogs(blogs))
+      .then(() =>
+        setNewBlog({
+          title: title,
+          author: author,
+          url: url,
+        })
+      )
+      .then(() =>
+        setTimeout(() => {
+          setNewBlog(null);
+        }, 5000)
+      );
+  };
+
   const blogList = () => (
     <div>
       <h2>blogs</h2>
@@ -106,67 +122,7 @@ const App = () => {
         </button>
       </h4>
 
-      {toggleBlogForm ? (
-        <div>
-          <h2>Create new Blog</h2>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              blogService
-                .create({
-                  title: newBlogTitle,
-                  author: newBlogAuthor,
-                  url: newBlogUrl,
-                })
-                .then(() => blogService.getAll())
-                .then((blogs) => setBlogs(blogs))
-                .then(() =>
-                  setNewBlog({
-                    title: newBlogTitle,
-                    author: newBlogAuthor,
-                    url: newBlogUrl,
-                  })
-                )
-                .then(() =>
-                  setTimeout(() => {
-                    setNewBlog(null);
-                  }, 5000)
-                );
-            }}
-          >
-            <div>
-              Title:
-              <input
-                type="text"
-                value={newBlogTitle}
-                name="Title"
-                onChange={({ target }) => setNewBlogTitle(target.value)}
-              />
-            </div>
-            <div>
-              Author:
-              <input
-                type="text"
-                value={newBlogAuthor}
-                name="Author"
-                onChange={({ target }) => setNewBlogAuthor(target.value)}
-              />
-            </div>
-            <div>
-              Url:
-              <input
-                type="text"
-                value={newBlogUrl}
-                name="Url"
-                onChange={({ target }) => setNewBlogUrl(target.value)}
-              />
-            </div>
-            <button type="submit">create</button>
-          </form>
-        </div>
-      ) : (
-        ''
-      )}
+      {toggleBlogForm ? <NewBlogForm handleSubmit={handleNewBlogSubmit} /> : ''}
       <button type="button" onClick={() => setToggleBlogForm(!toggleBlogForm)}>
         {toggleBlogForm ? 'cancel' : 'create new blog'}
       </button>
