@@ -63,6 +63,17 @@ const Blog = ({ blog, updateView }) => {
             </button>
           </p>
           <p>Author: {blog.author}</p>
+
+          <button
+            type="button"
+            onClick={() => {
+              confirm('Alerta do flequillo')
+                ? blogService.deleteId(blog.id)
+                : '';
+            }}
+          >
+            Remove
+          </button>
         </div>
       ) : (
         ''
