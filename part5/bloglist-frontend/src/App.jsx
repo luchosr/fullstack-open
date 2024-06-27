@@ -16,8 +16,11 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
+  const updateBlogsView = () =>
     blogService.getAll().then((blogs) => setBlogs(blogs));
+
+  useEffect(() => {
+    updateBlogsView();
   }, []);
 
   useEffect(() => {
@@ -127,7 +130,7 @@ const App = () => {
         {toggleBlogForm ? 'cancel' : 'create new blog'}
       </button>
       {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} updateView={updateBlogsView} />
       ))}
     </div>
   );

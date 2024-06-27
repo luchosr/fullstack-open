@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-const Blog = ({ blog }) => {
+import blogService from '../services/blogs';
+
+const Blog = ({ blog, updateView }) => {
   const [toggleDetails, setToggleDetails] = useState(false);
 
   return (
@@ -40,7 +42,26 @@ const Blog = ({ blog }) => {
           >
             {blog.url}
           </a>
-          <p>Likes: {blog.likes}</p>
+          <p>
+            Likes: {blog.likes}{' '}
+            <button
+              style={{ marginLeft: 5 }}
+              type="button"
+              onClick={() => {
+                blogService
+                  .update(blog.id, {
+                    user: blog.user,
+                    likes: blog.likes + 1,
+                    author: blog.author,
+                    title: blog.title,
+                    url: blog.url,
+                  })
+                  .then(() => updateView());
+              }}
+            >
+              like it!
+            </button>
+          </p>
           <p>Author: {blog.author}</p>
         </div>
       ) : (
