@@ -16,8 +16,20 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
 
-  const updateBlogsView = () =>
-    blogService.getAll().then((blogs) => setBlogs(blogs));
+  const compareLikes = (a, b) => {
+    if (a.likes > b.likes) {
+      return -1;
+    }
+    if (a.likes < b.likes) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const updateBlogsView = async () => {
+    const allBlogs = await blogService.getAll();
+    setBlogs(allBlogs.sort(compareLikes));
+  };
 
   useEffect(() => {
     updateBlogsView();
