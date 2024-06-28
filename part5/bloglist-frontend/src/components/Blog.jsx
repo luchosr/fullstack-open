@@ -67,8 +67,8 @@ const Blog = ({ blog, updateView }) => {
           <button
             type="button"
             onClick={() => {
-              confirm('Alerta do flequillo')
-                ? blogService.deleteId(blog.id)
+              confirm(`remove blog ${blog.title} by ${blog.author}??`)
+                ? blogService.deleteId(blog).then(() => updateView())
                 : '';
             }}
           >
