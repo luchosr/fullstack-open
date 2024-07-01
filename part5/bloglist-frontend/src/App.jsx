@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useState, useEffect } from 'react';
 
 import Blog from './components/Blog';
@@ -33,6 +34,7 @@ const App = () => {
 
   useEffect(() => {
     updateBlogsView();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

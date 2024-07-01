@@ -39,6 +39,7 @@ const Blog = ({ blog, updateView }) => {
             style={{ display: 'block', overflow: 'hidden' }}
             href={blog.url}
             target="_blank"
+            rel="noopener noreferrer"
           >
             {blog.url}
           </a>
