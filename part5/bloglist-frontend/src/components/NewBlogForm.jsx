@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import blogService from '../services/blogs';
 
 const NewBlogForm = ({ handleSubmit }) => {
-  const [blogs, setBlogs] = useState([]);
   const [newBlogTitle, setNewBlogTitle] = useState('');
   const [newBlogAuthor, setNewBlogAuthor] = useState('');
   const [newBlogUrl, setNewBlogUrl] = useState('');
