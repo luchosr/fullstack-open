@@ -9,13 +9,8 @@ const Loginform = ({
   password,
   setPassword,
 }) => {
-  const hideWhenVisible = { display: loginVisible ? 'none' : '' };
-  const showWhenVisible = { display: loginVisible ? '' : 'none' };
   return (
     <div>
-      <div style={hideWhenVisible}>
-        <button onClick={() => setLoginVisible(true)}>log in</button>
-      </div>
       <h2>Log in to application</h2>
       {message ? (
         <Notification message={message.text} messageType={message.type} />

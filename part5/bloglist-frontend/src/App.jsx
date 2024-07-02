@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Blog from './components/Blog';
 import NewBlogForm from './components/NewBlogForm';
 import Notification from './components/Notification';
+import Toggable from './components/Toggable';
 
 import blogService from './services/blogs';
 import loginService from './services/login';
@@ -97,7 +98,7 @@ const App = () => {
 
   return (
     <>
-      {user === null ? (
+      {/* {user === null ? (
         <Loginform
           message={message}
           onLogInSubmit={handleLogin}
@@ -115,7 +116,30 @@ const App = () => {
           blogList={blogs}
           bloglistUpdate={updateBlogsView}
         />
-      )}
+      )} */}
+
+      <Toggable buttonLabel="User LogIn">
+        <Loginform
+          message={message}
+          onLogInSubmit={handleLogin}
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+        />
+      </Toggable>
+      <Toggable buttonLabel="Create new Blog">
+        <NewBlogForm handleSubmit={handleNewBlogSubmit} />
+      </Toggable>
+
+      <Bloglist
+        message={message}
+        blogUser={user}
+        onLogOut={logout}
+        newBlogSubmit={handleNewBlogSubmit}
+        blogList={blogs}
+        bloglistUpdate={updateBlogsView}
+      />
     </>
   );
 };
