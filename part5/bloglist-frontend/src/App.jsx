@@ -13,10 +13,15 @@ import Loginform from './components/Loginform';
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [newBlog, setNewBlog] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [message, setMessage] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+
+  const updateBlogsView = async () => {
+    const allBlogs = await blogService.getAll();
+    setBlogs(allBlogs.sort(compareLikes));
+  };
 
   const compareLikes = (a, b) => {
     if (a.likes > b.likes) {
@@ -26,11 +31,6 @@ const App = () => {
       return 1;
     }
     return 0;
-  };
-
-  const updateBlogsView = async () => {
-    const allBlogs = await blogService.getAll();
-    setBlogs(allBlogs.sort(compareLikes));
   };
 
   useEffect(() => {
@@ -60,10 +60,10 @@ const App = () => {
       setUsername('');
       setPassword('');
     } catch (exception) {
-      setErrorMessage('Wrong credentials');
+      setMessage({ text: 'Wrong credentials', type: 'error' });
 
       setTimeout(() => {
-        setErrorMessage(null);
+        setMessage(null);
       }, 5000);
     }
   };
@@ -73,34 +73,25 @@ const App = () => {
     setUser(null);
   };
 
-  const handleNewBlogSubmit = (title, author, url) => {
-    blogService
-      .create({
+  const handleNewBlogSubmit = async (title, author, url) => {
+    try {
+      await blogService.create({
         title: title,
         author: author,
         url: url,
-      })
-      .then(() => blogService.getAll())
-      .then((blogs) => setBlogs(blogs))
-      .then(() =>
-        setNewBlog({
-          title: title,
-          author: author,
-          url: url,
-        })
-      )
-      .then(() =>
-        setTimeout(() => {
-          setNewBlog(null);
-        }, 5000)
-      );
+      });
+    } catch (exception) {
+      console.log('the error is: ', exception);
+    }
+
+    updateBlogsView();
   };
 
   return (
     <>
       {user === null ? (
         <Loginform
-          errorMessage={errorMessage}
+          message={message}
           onLogInSubmit={handleLogin}
           username={username}
           setUsername={setUsername}

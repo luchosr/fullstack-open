@@ -8,6 +8,7 @@ const Blog = ({ blog, updateView }) => {
   return (
     <>
       <div
+        className="blog"
         style={{
           border: '1px solid black',
           width: '50%',
@@ -16,8 +17,11 @@ const Blog = ({ blog, updateView }) => {
           margin: 10,
         }}
       >
-        {blog.title} {blog.author}
+        <h3> {blog.title}</h3>
+        <h4> {blog.author}</h4>
+
         <button
+          className="view"
           style={{ marginLeft: 5 }}
           type="button"
           onClick={() => setToggleDetails(!toggleDetails)}
