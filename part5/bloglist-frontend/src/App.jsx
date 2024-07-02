@@ -12,7 +12,7 @@ import Loginform from './components/Loginform';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [newBlog, setNewBlog] = useState(null);
+  const [loginVisible, setLoginVisible] = useState(false);
   const [message, setMessage] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -61,7 +61,6 @@ const App = () => {
       setPassword('');
     } catch (exception) {
       setMessage({ text: 'Wrong credentials', type: 'error' });
-
       setTimeout(() => {
         setMessage(null);
       }, 5000);
@@ -80,6 +79,15 @@ const App = () => {
         author: author,
         url: url,
       });
+
+      setMessage({
+        text: `A new blog ${title} is added by ${author} `,
+        type: 'success',
+      });
+
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
     } catch (exception) {
       console.log('the error is: ', exception);
     }
@@ -100,7 +108,7 @@ const App = () => {
         />
       ) : (
         <Bloglist
-          newBlog={newBlog}
+          message={message}
           blogUser={user}
           onLogOut={logout}
           newBlogSubmit={handleNewBlogSubmit}

@@ -5,7 +5,7 @@ import Blog from './Blog';
 import Notification from './Notification';
 
 const Bloglist = ({
-  newBlog,
+  message,
   blogUser,
   onLogOut,
   newBlogSubmit,
@@ -17,12 +17,11 @@ const Bloglist = ({
   return (
     <div>
       <h2>blogs</h2>
-
-      {newBlog
-        ? Notification(
-            `a new blog ${newBlog.title} by ${newBlog.author} has been added`
-          )
-        : ''}
+      {message ? (
+        <Notification message={message.text} messageType={message.type} />
+      ) : (
+        ''
+      )}
       <h4>
         {blogUser.name} has logged in
         <button type="button" onClick={onLogOut}>
