@@ -1,9 +1,7 @@
 /* eslint-disable indent */
 import { useState, useEffect, useRef } from 'react';
 
-import Blog from './components/Blog';
 import NewBlogForm from './components/NewBlogForm';
-import Notification from './components/Notification';
 import Toggable from './components/Toggable';
 
 import blogService from './services/blogs';
@@ -13,7 +11,6 @@ import Loginform from './components/Loginform';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [loginVisible, setLoginVisible] = useState(false);
   const [message, setMessage] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
