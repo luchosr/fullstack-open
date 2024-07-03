@@ -1,12 +1,11 @@
 /* eslint-disable linebreak-style */
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 import Togglable from './Toggable';
 
 import blogService from '../services/blogs';
 
 const Blog = ({ blog, updateView }) => {
-  const [toggleDetails, setToggleDetails] = useState(false);
   const blogDetailsRef = useRef();
 
   return (
@@ -23,15 +22,6 @@ const Blog = ({ blog, updateView }) => {
       >
         <h3 className="blog-title"> {blog.title}</h3>
         <h4 className="blog-author"> {blog.author}</h4>
-
-        <button
-          className="view"
-          style={{ marginLeft: 5 }}
-          type="button"
-          onClick={() => setToggleDetails(!toggleDetails)}
-        >
-          {toggleDetails ? 'hide' : 'view'}
-        </button>
 
         <Togglable buttonLabel="Show details" ref={blogDetailsRef}>
           <div className="blog-details">
