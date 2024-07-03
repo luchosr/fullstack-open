@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import Blog from './components/Blog';
 import NewBlogForm from './components/NewBlogForm';
@@ -18,6 +18,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+  const logInFormRef = useRef();
 
   const updateBlogsView = async () => {
     const allBlogs = await blogService.getAll();
@@ -60,6 +61,7 @@ const App = () => {
       setUser(user);
       setUsername('');
       setPassword('');
+      logInFormRef.current.toggleVisibility();
     } catch (exception) {
       setMessage({ text: 'Wrong credentials', type: 'error' });
       setTimeout(() => {
@@ -118,7 +120,7 @@ const App = () => {
         />
       )} */}
 
-      <Toggable buttonLabel="User LogIn">
+      <Toggable buttonLabel="User LogIn" ref={logInFormRef}>
         <Loginform
           message={message}
           onLogInSubmit={handleLogin}
