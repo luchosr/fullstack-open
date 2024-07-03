@@ -100,26 +100,6 @@ const App = () => {
 
   return (
     <>
-      {/* {user === null ? (
-        <Loginform
-          message={message}
-          onLogInSubmit={handleLogin}
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
-        />
-      ) : (
-        <Bloglist
-          message={message}
-          blogUser={user}
-          onLogOut={logout}
-          newBlogSubmit={handleNewBlogSubmit}
-          blogList={blogs}
-          bloglistUpdate={updateBlogsView}
-        />
-      )} */}
-
       <Toggable buttonLabel="User LogIn" ref={logInFormRef}>
         <Loginform
           message={message}

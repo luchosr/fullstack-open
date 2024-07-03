@@ -10,9 +10,9 @@ test('renders content', () => {
     likes: 4,
   };
 
-  const { container } = render(
-    <Blog blog={blog} updateView={() => console.log('update')} />
-  );
+  const mockHandler = vi.fn();
+
+  const { container } = render(<Blog blog={blog} updateView={mockHandler} />);
 
   const div = container.querySelector('.blog');
   expect(div).toHaveTextContent(
@@ -20,9 +20,9 @@ test('renders content', () => {
   );
 });
 
-test('clicking the button calls event handler once', async () => {
+test('blog component should show only a title and an blog author ', () => {
   const blog = {
-    content: 'Component testing is done with react-testing-library',
+    title: 'Component testing is done with react-testing-library',
     author: 'luciano',
     url: 'www.testing.com',
     likes: 4,
@@ -32,9 +32,15 @@ test('clicking the button calls event handler once', async () => {
 
   const { container } = render(<Blog blog={blog} updateView={mockHandler} />);
 
-  const user = userEvent.setup();
-  const button = container.querySelector('.view');
-  await user.click(button);
+  const h3 = container.querySelector('.blog-title');
 
-  expect(mockHandler.mock.calls).toHaveLength(1);
+  const h4 = container.querySelector('.blog-author');
+  expect(h3).toHaveTextContent(
+    'Component testing is done with react-testing-library'
+  );
+  expect(h4).toHaveTextContent('luciano');
+
+  const details = container.querySelector('.togglableContent');
+
+  expect(details).toHaveStyle('display: none');
 });
