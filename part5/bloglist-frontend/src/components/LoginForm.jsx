@@ -2,7 +2,7 @@ import React from 'react';
 import Notification from './Notification';
 
 const Loginform = ({
-  errorMessage,
+  message,
   onLogInSubmit,
   username,
   setUsername,
@@ -12,7 +12,11 @@ const Loginform = ({
   return (
     <div>
       <h2>Log in to application</h2>
-      {errorMessage ? Notification(errorMessage) : ''}
+      {message ? (
+        <Notification message={message.text} messageType={message.type} />
+      ) : (
+        ''
+      )}
       <form onSubmit={onLogInSubmit}>
         <div>
           username
