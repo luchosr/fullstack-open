@@ -1,7 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable indent */
-import React, { useState } from 'react';
-import NewBlogForm from './NewBlogForm';
+import React from 'react';
 import Blog from './Blog';
 import Notification from './Notification';
 

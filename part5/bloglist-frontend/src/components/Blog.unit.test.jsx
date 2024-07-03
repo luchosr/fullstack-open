@@ -10,10 +10,9 @@ test('renders content', () => {
   };
 
   const mockHandler = vi.fn();
-
   const { container } = render(<Blog blog={blog} updateView={mockHandler} />);
-
   const div = container.querySelector('.blog');
+
   expect(div).toHaveTextContent(
     'Component testing is done with react-testing-library'
   );
@@ -28,18 +27,15 @@ test('blog component should show only a title and an blog author ', () => {
   };
 
   const mockHandler = vi.fn();
-
   const { container } = render(<Blog blog={blog} updateView={mockHandler} />);
 
   const h3 = container.querySelector('.blog-title');
-
   const h4 = container.querySelector('.blog-author');
+  const details = container.querySelector('.togglableContent');
+
   expect(h3).toHaveTextContent(
     'Component testing is done with react-testing-library'
   );
   expect(h4).toHaveTextContent('luciano');
-
-  const details = container.querySelector('.togglableContent');
-
   expect(details).toHaveStyle('display: none');
 });
