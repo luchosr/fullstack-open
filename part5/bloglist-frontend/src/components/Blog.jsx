@@ -40,29 +40,28 @@ const Blog = ({ blog, updateView }) => {
               href={blog.url}
               target="_blank"
               rel="noopener noreferrer"
+              className="details-url"
             >
               {blog.url}
             </a>
-            <p>
-              Likes: {blog.likes}{' '}
-              <button
-                style={{ marginLeft: 5 }}
-                type="button"
-                onClick={() => {
-                  blogService
-                    .update(blog.id, {
-                      user: blog.user,
-                      likes: blog.likes + 1,
-                      author: blog.author,
-                      title: blog.title,
-                      url: blog.url,
-                    })
-                    .then(() => updateView());
-                }}
-              >
-                like it!
-              </button>
-            </p>
+            <p className="blog-likes">Likes: {blog.likes} </p>
+            <button
+              style={{ marginLeft: 5 }}
+              type="button"
+              onClick={() => {
+                blogService
+                  .update(blog.id, {
+                    user: blog.user,
+                    likes: blog.likes + 1,
+                    author: blog.author,
+                    title: blog.title,
+                    url: blog.url,
+                  })
+                  .then(() => updateView());
+              }}
+            >
+              like it!
+            </button>
             <p>Author: {blog.author}</p>
 
             <button
