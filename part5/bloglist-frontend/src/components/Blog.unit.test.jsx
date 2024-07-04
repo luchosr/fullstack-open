@@ -96,3 +96,20 @@ test('likes button should two times and fire the amount of likes of the blog', a
 
   expect(mockHandler.mock.calls).toHaveLength(2);
 });
+
+test('<Blog /> should pass a snapshot testing', () => {
+  const blog = {
+    title: 'Component testing is done with react-testing-library',
+    author: 'luciano',
+    url: 'www.testing.com',
+    likes: 4,
+  };
+
+  const mockHandler = vi.fn();
+
+  const newBlog = render(
+    <Blog blog={blog} updateLikes={mockHandler} removeBlog={mockHandler} />
+  );
+
+  expect(newBlog).toMatchSnapshot();
+});
