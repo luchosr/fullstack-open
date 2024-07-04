@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NewBlogForm from './NewBlogForm';
-import { input } from '@testing-library/user-event/dist/cjs/event/input.js';
 
 test('<NewBlogForm /> updates parent state and calls onSubmit', async () => {
   const submitBlog = vi.fn();
