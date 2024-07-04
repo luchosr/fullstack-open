@@ -25,3 +25,11 @@ test('<NewBlogForm /> updates parent state and calls onSubmit', async () => {
   expect(submitBlog.mock.calls[0][1]).toBe('testing the author');
   expect(submitBlog.mock.calls[0][2]).toBe('testingurl.com');
 });
+
+test('<NewBlogForm /> should pass a snapshot testing', () => {
+  const submitBlog = vi.fn();
+
+  const blogForm = render(<NewBlogForm handleSubmit={submitBlog} />);
+
+  expect(blogForm).toMatchSnapshot();
+});
