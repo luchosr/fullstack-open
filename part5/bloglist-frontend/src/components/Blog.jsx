@@ -3,9 +3,7 @@ import { useRef } from 'react';
 
 import Togglable from './Toggable';
 
-import blogService from '../services/blogs';
-
-const Blog = ({ blog, updateView }) => {
+const Blog = ({ blog, updateLikes, removeBlog }) => {
   const blogDetailsRef = useRef();
 
   return (
@@ -36,32 +34,16 @@ const Blog = ({ blog, updateView }) => {
             </a>
             <p className="blog-likes">Likes: {blog.likes} </p>
             <button
+              className="blog-likes-button"
               style={{ marginLeft: 5 }}
               type="button"
-              onClick={() => {
-                blogService
-                  .update(blog.id, {
-                    user: blog.user,
-                    likes: blog.likes + 1,
-                    author: blog.author,
-                    title: blog.title,
-                    url: blog.url,
-                  })
-                  .then(() => updateView());
-              }}
+              onClick={() => updateLikes(blog)}
             >
               like it!
             </button>
             <p>Author: {blog.author}</p>
 
-            <button
-              type="button"
-              onClick={() => {
-                confirm(`remove blog ${blog.title} by ${blog.author}??`)
-                  ? blogService.deleteId(blog).then(() => updateView())
-                  : '';
-              }}
-            >
+            <button type="button" onClick={() => removeBlog(blog)}>
               Remove
             </button>
           </div>

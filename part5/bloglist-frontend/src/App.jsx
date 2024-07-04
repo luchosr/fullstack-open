@@ -72,6 +72,20 @@ const App = () => {
     setUser(null);
   };
 
+  const handleBlogLikes = async (blog) => {
+    await blogService.update(blog.id, {
+      ...blog,
+      likes: blog.likes + 1,
+    });
+    updateBlogsView();
+  };
+
+  const handleBlogRemove = (blog) => {
+    confirm(`remove blog ${blog.title} by ${blog.author}??`)
+      ? blogService.deleteId(blog).then(() => updateBlogsView())
+      : '';
+  };
+
   const handleNewBlogSubmit = async (title, author, url) => {
     try {
       await blogService.create({
@@ -117,7 +131,8 @@ const App = () => {
         onLogOut={logout}
         newBlogSubmit={handleNewBlogSubmit}
         blogList={blogs}
-        bloglistUpdate={updateBlogsView}
+        likeButtonHandler={handleBlogLikes}
+        removeButtonHandler={handleBlogRemove}
       />
     </>
   );
