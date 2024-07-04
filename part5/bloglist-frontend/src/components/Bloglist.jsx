@@ -6,8 +6,9 @@ const Bloglist = ({
   message,
   onLogOut,
   blogList,
-  bloglistUpdate,
+  likeButtonHandler,
   blogUser,
+  removeButtonHandler,
 }) => {
   return (
     <div>
@@ -29,7 +30,12 @@ const Bloglist = ({
       )}
 
       {blogList.map((blog) => (
-        <Blog key={blog.id} blog={blog} updateView={bloglistUpdate} />
+        <Blog
+          key={blog.id}
+          blog={blog}
+          updateLikes={likeButtonHandler}
+          removeBlog={removeButtonHandler}
+        />
       ))}
     </div>
   );

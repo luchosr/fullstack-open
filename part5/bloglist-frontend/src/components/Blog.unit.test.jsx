@@ -11,7 +11,9 @@ test('renders content', () => {
   };
 
   const mockHandler = vi.fn();
-  const { container } = render(<Blog blog={blog} updateView={mockHandler} />);
+  const { container } = render(
+    <Blog blog={blog} updateLikes={mockHandler} removeBlog={mockHandler} />
+  );
   const div = container.querySelector('.blog');
 
   expect(div).toHaveTextContent(
@@ -28,8 +30,9 @@ test('blog component should show only a title and an blog author ', () => {
   };
 
   const mockHandler = vi.fn();
-  const { container } = render(<Blog blog={blog} updateView={mockHandler} />);
-
+  const { container } = render(
+    <Blog blog={blog} updateLikes={mockHandler} removeBlog={mockHandler} />
+  );
   const h3 = container.querySelector('.blog-title');
   const h4 = container.querySelector('.blog-author');
   const details = container.querySelector('.togglableContent');
@@ -51,18 +54,45 @@ test('blog should show blog url and likes when show details button is clicked', 
   };
 
   const mockHandler = vi.fn();
-  const { container } = render(<Blog blog={blog} updateView={mockHandler} />);
+  const { container } = render(
+    <Blog blog={blog} updateLikes={mockHandler} removeBlog={mockHandler} />
+  );
 
   const user = userEvent.setup();
   const button = screen.getByText('Show details');
 
   await user.click(button);
-  const div = container.querySelector('.togglableContent');
 
+  const div = container.querySelector('.togglableContent');
   const detailsUrl = container.querySelector('.details-url');
   const detailsLikes = container.querySelector('.blog-likes');
 
   expect(div).not.toHaveStyle('display: none');
   expect(detailsUrl).toHaveTextContent('www.testing.com');
   expect(detailsLikes).toHaveTextContent('Likes: 4');
+});
+
+test('likes button should two times and fire the amount of likes of the blog', async () => {
+  const blog = {
+    title: 'Component testing is done with react-testing-library',
+    author: 'luciano',
+    url: 'www.testing.com',
+    likes: 4,
+  };
+  const mockHandler = vi.fn();
+  const { container } = render(
+    <Blog blog={blog} updateLikes={mockHandler} removeBlog={mockHandler} />
+  );
+
+  const user = userEvent.setup();
+  const showDetailsButton = screen.getByText('Show details');
+
+  await user.click(showDetailsButton);
+
+  const detailsLikes = container.querySelector('.blog-likes-button');
+
+  await user.click(detailsLikes);
+  await user.click(detailsLikes);
+
+  expect(mockHandler.mock.calls).toHaveLength(2);
 });
