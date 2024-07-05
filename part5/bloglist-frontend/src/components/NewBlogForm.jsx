@@ -10,6 +10,7 @@ const NewBlogForm = ({ handleSubmit }) => {
     <div>
       <h2>Create new Blog</h2>
       <form
+        className="blog-form"
         onSubmit={(event) => {
           event.preventDefault();
           handleSubmit(newBlogTitle, newBlogAuthor, newBlogUrl);
@@ -21,6 +22,7 @@ const NewBlogForm = ({ handleSubmit }) => {
         <div>
           Title:
           <input
+            id="blogTitle"
             type="text"
             value={newBlogTitle}
             placeholder="add a blog title here"
@@ -30,6 +32,7 @@ const NewBlogForm = ({ handleSubmit }) => {
         <div>
           Author:
           <input
+            id="blogAuthor"
             type="text"
             value={newBlogAuthor}
             placeholder="add a blog author here"
@@ -39,13 +42,16 @@ const NewBlogForm = ({ handleSubmit }) => {
         <div>
           Url:
           <input
+            id="blogUrl"
             type="text"
             value={newBlogUrl}
             placeholder="add a blog url here"
             onChange={({ target }) => setNewBlogUrl(target.value)}
           />
         </div>
-        <button type="submit">create</button>
+        <button id="createNewBlogButton" type="submit">
+          create
+        </button>
       </form>
     </div>
   );

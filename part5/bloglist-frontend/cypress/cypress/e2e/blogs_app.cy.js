@@ -1,4 +1,7 @@
 describe('Blogs app', function () {
+  // cy.login es un command de Cypress (parecido a un custom hook )
+  // en donde se guarda la lógica de inicio de sesión para usarla en varias partes
+
   beforeEach(function () {
     cy.request('POST', 'http://localhost:3003/api/testing/reset');
     const user = {
@@ -44,8 +47,34 @@ describe('Blogs app', function () {
 
       cy.get('#login-button').click();
 
-      cy.get('.error').should('contain', 'Wrong credentials');
-      cy.get('.error').should('have.css', 'border', '2px solid rgb(255, 0, 0)');
+      // Cypress requiere que los colores se den como rgb.
+
+      // Debido a que todas las pruebas son para el mismo componente al que accedimos usando cy.get, podemos encadenarlos usando and.
+
+      cy.get('.error')
+        .should('contain', 'Wrong credentials')
+        .and('have.css', 'border', '2px solid rgb(255, 0, 0)');
+
+      cy.get('html').should('not.contain', 'luchosr is logged in');
+    });
+  });
+
+  describe('When log in', function () {
+    beforeEach(function () {
+      cy.login({ username: 'luchosr', password: 'wordpass' });
+    });
+
+    it('A blog can be created', function () {
+      cy.contains('Create new Blog').click();
+      cy.contains('Create new Blog');
+
+      cy.get('#blogTitle').type('testing the title input');
+      cy.get('#blogAuthor').type('Mr BlogAuthor');
+      cy.get('#blogUrl').type('www.blogurl.com');
+
+      cy.get('#createNewBlogButton').click();
+
+      cy.get('.success');
     });
   });
 });

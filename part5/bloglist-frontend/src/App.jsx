@@ -60,10 +60,11 @@ const App = () => {
       setPassword('');
       logInFormRef.current.toggleVisibility();
     } catch (exception) {
+      console.log('la exeption es: ', exception);
       setMessage({ text: 'Wrong credentials', type: 'error' });
       setTimeout(() => {
         setMessage(null);
-      }, 6000);
+      }, 4000);
     }
   };
 
