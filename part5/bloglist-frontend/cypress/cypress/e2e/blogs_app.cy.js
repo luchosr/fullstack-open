@@ -46,7 +46,6 @@ describe('Blogs app', function () {
 
       cy.get('.error').should('contain', 'Wrong credentials');
       cy.get('.error').should('have.css', 'border', '2px solid rgb(255, 0, 0)');
-      // cy.get('.error').should('have.css', 'border-style', 'solid');
     });
   });
 });
