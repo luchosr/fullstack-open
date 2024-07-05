@@ -3,9 +3,9 @@
   padding: 20px;
 }
 .success {
-  border: 2px solid green;
+  border: 2px solid #008000;
 }
 
 .error {
-  border: 2px solid red;
+  border: 2px solid rgb(255, 0, 0);
 }

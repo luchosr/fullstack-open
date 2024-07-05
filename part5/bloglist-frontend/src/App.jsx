@@ -63,7 +63,7 @@ const App = () => {
       setMessage({ text: 'Wrong credentials', type: 'error' });
       setTimeout(() => {
         setMessage(null);
-      }, 5000);
+      }, 6000);
     }
   };
 

@@ -24,7 +24,7 @@ const Loginform = ({
             type="text"
             value={username}
             placeholder="Type your username here"
-            name="Username"
+            id="username"
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
@@ -34,11 +34,13 @@ const Loginform = ({
             type="password"
             value={password}
             placeholder="Introduce your password"
-            name="Password"
+            id="password"
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" id="login-button">
+          Login
+        </button>
       </form>
     </div>
   );
