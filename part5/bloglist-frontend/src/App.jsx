@@ -96,7 +96,7 @@ const App = () => {
       });
 
       setNewBlogMessage({
-        text: `A new blog ${title} is added by ${author} `,
+        text: `A new blog ${title} is added by ${author}`,
         type: 'success',
       });
 
