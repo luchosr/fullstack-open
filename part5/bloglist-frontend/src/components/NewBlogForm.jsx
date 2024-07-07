@@ -21,6 +21,7 @@ const NewBlogForm = ({ handleSubmit }) => {
         <div>
           Title:
           <input
+            data-testid="title"
             type="text"
             value={newBlogTitle}
             placeholder="add a blog title here"
@@ -30,6 +31,7 @@ const NewBlogForm = ({ handleSubmit }) => {
         <div>
           Author:
           <input
+            data-testid="author"
             type="text"
             value={newBlogAuthor}
             placeholder="add a blog author here"
@@ -39,13 +41,16 @@ const NewBlogForm = ({ handleSubmit }) => {
         <div>
           Url:
           <input
+            data-testid="url"
             type="text"
             value={newBlogUrl}
             placeholder="add a blog url here"
             onChange={({ target }) => setNewBlogUrl(target.value)}
           />
         </div>
-        <button type="submit">create</button>
+        <button type="submit" name="create">
+          create
+        </button>
       </form>
     </div>
   );
