@@ -31,22 +31,27 @@ describe('Blogs App', () => {
     await expect(page.getByRole('button', { name: 'login' })).toBeVisible();
   });
 
-  // describe('Login', () => {
-  //   {
-  //     test('succeeds with correct credentials', async ({ page }) => {
-  //       await page.getByRole('button', { name: 'Show User LogIn' }).click();
+  describe('Login', () => {
+    beforeEach(async ({ page, request }) => {
+      await page.getByRole('button', { name: 'Show User LogIn' }).click();
+    });
 
-  //       await page.getByTestId('username').fill('luchosr');
-  //       await page.getByTestId('password').fill('wordpass');
+    test('succeeds with correct credentials', async ({ page }) => {
+      await page.getByTestId('username').fill('luchosr');
+      await page.getByTestId('password').fill('wordpass');
 
-  //       await page.getByRole('button', { name: 'login' }).click();
+      await page.getByRole('button', { name: 'login' }).click();
 
-  //       await expect(page.getByText('luchosr is logged in')).toBeVisible();
-  //     });
+      await expect(page.getByText('luchosr is logged in')).toBeVisible();
+    });
 
-  //     test('fails with wrong credentials', async ({ page }) => {
+    test('fails with wrong credentials', async ({ page }) => {
+      await page.getByTestId('username').fill('luchosr');
+      await page.getByTestId('password').fill('wordpas');
 
-  //     });
-  //   }
-  // });
+      await page.getByRole('button', { name: 'login' }).click();
+
+      await expect(page.getByText('Wrong credentials')).toBeVisible();
+    });
+  });
 });
