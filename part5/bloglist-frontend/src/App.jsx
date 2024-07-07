@@ -11,7 +11,8 @@ import Loginform from './components/Loginform';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [message, setMessage] = useState(null);
+  const [loginMessage, setLoginMessage] = useState(null);
+  const [newBlogMessage, setNewBlogMessage] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
@@ -60,9 +61,9 @@ const App = () => {
       setPassword('');
       logInFormRef.current.toggleVisibility();
     } catch (exception) {
-      setMessage({ text: 'Wrong credentials', type: 'error' });
+      setLoginMessage({ text: 'Wrong credentials', type: 'error' });
       setTimeout(() => {
-        setMessage(null);
+        setLoginMessage(null);
       }, 6000);
     }
   };
@@ -94,13 +95,13 @@ const App = () => {
         url: url,
       });
 
-      setMessage({
+      setNewBlogMessage({
         text: `A new blog ${title} is added by ${author} `,
         type: 'success',
       });
 
       setTimeout(() => {
-        setMessage(null);
+        setNewBlogMessage(null);
       }, 5000);
     } catch (exception) {
       console.log('the error is: ', exception);
@@ -113,7 +114,7 @@ const App = () => {
     <>
       <Toggable buttonLabel="Show User LogIn" ref={logInFormRef}>
         <Loginform
-          message={message}
+          message={loginMessage}
           onLogInSubmit={handleLogin}
           username={username}
           setUsername={setUsername}
@@ -128,7 +129,7 @@ const App = () => {
       </Toggable>
 
       <Bloglist
-        message={message}
+        message={newBlogMessage}
         blogUser={user}
         onLogOut={logout}
         newBlogSubmit={handleNewBlogSubmit}
