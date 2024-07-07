@@ -12,7 +12,6 @@ const Bloglist = ({
 }) => {
   return (
     <div>
-      <h2>blogs</h2>
       {message ? (
         <Notification message={message.text} messageType={message.type} />
       ) : (

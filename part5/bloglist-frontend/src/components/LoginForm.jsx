@@ -22,6 +22,7 @@ const Loginform = ({
           <label htmlFor="username">Username:</label>
           <input
             type="text"
+            data-testid="username"
             value={username}
             placeholder="Type your username here"
             id="username"
@@ -32,13 +33,14 @@ const Loginform = ({
           <label htmlFor="password">Password:</label>
           <input
             type="password"
+            data-testid="password"
             value={password}
             placeholder="Introduce your password"
             id="password"
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit" id="login-button">
+        <button type="submit" name="login" id="login-button">
           Login
         </button>
       </form>

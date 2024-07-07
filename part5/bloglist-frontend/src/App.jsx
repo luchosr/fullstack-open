@@ -111,7 +111,7 @@ const App = () => {
 
   return (
     <>
-      <Toggable buttonLabel="User LogIn" ref={logInFormRef}>
+      <Toggable buttonLabel="Show User LogIn" ref={logInFormRef}>
         <Loginform
           message={message}
           onLogInSubmit={handleLogin}
@@ -121,6 +121,8 @@ const App = () => {
           setPassword={setPassword}
         />
       </Toggable>
+
+      <h1>Blogs App</h1>
       <Toggable buttonLabel="Create new Blog">
         <NewBlogForm handleSubmit={handleNewBlogSubmit} />
       </Toggable>
@@ -134,6 +136,10 @@ const App = () => {
         likeButtonHandler={handleBlogLikes}
         removeButtonHandler={handleBlogRemove}
       />
+
+      <div className="footer">
+        Blog app, Department of Computer Science, University of Helsinki 2024
+      </div>
     </>
   );
 };
