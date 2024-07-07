@@ -1,7 +1,15 @@
 const { test, describe, expect, beforeEach } = require('@playwright/test');
 
 describe('Blogs App', () => {
-  beforeEach(async ({ page }) => {
+  beforeEach(async ({ page, request }) => {
+    await request.post('http:localhost:3003/api/testing/reset');
+    await request.post('http://localhost:3003/api/users', {
+      data: {
+        username: 'luchosr',
+        password: 'wordpass',
+      },
+    });
+
     await page.goto('http://localhost:5173');
   });
 
@@ -18,11 +26,32 @@ describe('Blogs App', () => {
   test('Login form is shown', async ({ page }) => {
     await page.getByRole('button', { name: 'Show User LogIn' }).click();
 
-    await page.getByTestId('username').fill('luchosr');
-    await page.getByTestId('password').fill('wordpass');
+    await expect(page.getByText('Username:')).toBeVisible();
+    await expect(page.getByText('Password:')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'login' })).toBeVisible();
+  });
 
-    await page.getByRole('button', { name: 'login' }).click();
+  describe('Login', () => {
+    beforeEach(async ({ page, request }) => {
+      await page.getByRole('button', { name: 'Show User LogIn' }).click();
+    });
 
-    await expect(page.getByText('luchosr is logged in')).toBeVisible();
+    test('succeeds with correct credentials', async ({ page }) => {
+      await page.getByTestId('username').fill('luchosr');
+      await page.getByTestId('password').fill('wordpass');
+
+      await page.getByRole('button', { name: 'login' }).click();
+
+      await expect(page.getByText('luchosr is logged in')).toBeVisible();
+    });
+
+    test('fails with wrong credentials', async ({ page }) => {
+      await page.getByTestId('username').fill('luchosr');
+      await page.getByTestId('password').fill('wordpas');
+
+      await page.getByRole('button', { name: 'login' }).click();
+
+      await expect(page.getByText('Wrong credentials')).toBeVisible();
+    });
   });
 });
