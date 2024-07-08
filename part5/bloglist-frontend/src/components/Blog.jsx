@@ -3,7 +3,7 @@ import { useRef } from 'react';
 
 import Togglable from './Toggable';
 
-const Blog = ({ blog, updateLikes, removeBlog }) => {
+const Blog = ({ blog, updateLikes, removeBlog, userLoggedIn }) => {
   const blogDetailsRef = useRef();
 
   return (
@@ -44,9 +44,13 @@ const Blog = ({ blog, updateLikes, removeBlog }) => {
             </button>
             <p>Author: {blog.author}</p>
 
-            <button type="button" onClick={() => removeBlog(blog)}>
-              Remove
-            </button>
+            {userLoggedIn ? (
+              <button type="button" onClick={() => removeBlog(blog)}>
+                Remove
+              </button>
+            ) : (
+              ''
+            )}
           </div>
         </Togglable>
       </div>

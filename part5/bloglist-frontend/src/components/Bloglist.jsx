@@ -32,6 +32,7 @@ const Bloglist = ({
         <Blog
           key={blog.id}
           blog={blog}
+          userLoggedIn={blogUser}
           updateLikes={likeButtonHandler}
           removeBlog={removeButtonHandler}
         />
