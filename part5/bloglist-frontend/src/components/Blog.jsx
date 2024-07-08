@@ -45,7 +45,11 @@ const Blog = ({ blog, updateLikes, removeBlog, userLoggedIn }) => {
             <p>Author: {blog.author}</p>
 
             {userLoggedIn ? (
-              <button type="button" onClick={() => removeBlog(blog)}>
+              <button
+                type="button"
+                name="log out"
+                onClick={() => removeBlog(blog)}
+              >
                 Remove
               </button>
             ) : (
