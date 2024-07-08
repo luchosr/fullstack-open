@@ -91,5 +91,13 @@ describe('Blogs App', () => {
         page.getByText('Testing the remove button')
       ).not.toBeVisible();
     });
+
+    test('when the user logout a blog cannot be removed', async ({ page }) => {
+      await page.getByRole('button', { name: 'log out' }).click();
+
+      await page.getByRole('button', { name: 'Show details' }).click();
+
+      await expect(page.getByText('Remove')).not.toBeVisible();
+    });
   });
 });
