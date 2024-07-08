@@ -37,6 +37,7 @@ const Blog = ({ blog, updateLikes, removeBlog }) => {
               className="blog-likes-button"
               style={{ marginLeft: 5 }}
               type="button"
+              name="likeUpdate"
               onClick={() => updateLikes(blog)}
             >
               like it!
