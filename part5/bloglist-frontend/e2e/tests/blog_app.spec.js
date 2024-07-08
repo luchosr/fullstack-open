@@ -59,6 +59,10 @@ describe('Blogs App', () => {
       });
     });
 
+    // Sometimes you will need to stop and re run all suites (vite, backend and playwright),
+    // for make a cleanup and then run the tests successfully
+    //  if you have a JWT problem, do a manual login for the user
+
     test('a new blog can be created', async ({ page }) => {
       await expect(
         page.getByText('A new blog Testing the title is added by Playwright')
@@ -74,6 +78,18 @@ describe('Blogs App', () => {
       await page.getByText('like it!').click();
 
       await expect(page.getByText('Likes: 1')).toBeVisible();
+    });
+
+    test('a blog can be removed', async ({ page }) => {
+      await page.getByRole('button', { name: 'Show details' }).click();
+
+      await page.getByText('Remove').click();
+
+      await page.on('dialog', (dialog) => dialog.accept());
+
+      await expect(
+        page.getByText('Testing the remove button')
+      ).not.toBeVisible();
     });
   });
 });
