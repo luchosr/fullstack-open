@@ -99,5 +99,40 @@ describe('Blogs App', () => {
 
       await expect(page.getByText('Remove')).not.toBeVisible();
     });
+
+    // The following test is WIP!!
+    test('blogs are sorted related to the number of likes in a descendant way', async ({
+      page,
+    }) => {
+      await page.getByTestId('title').fill('Testing second blog');
+      await page.getByTestId('author').fill('Playwright');
+      await page.getByTestId('url').fill('www.playwright.com');
+
+      await page.getByRole('button', { name: 'create' }).click();
+
+      const showDetails = await page
+        .getByRole('button', {
+          name: 'Show details',
+        })
+        .all();
+
+      // await showDetails[0].click();
+
+      // await showDetails[1].click();
+
+      // const showBlogLikes = await page.getByTestId('blog-likes').all();
+
+      // const likeButtons = await page
+      //   .getByRole('button', {
+      //     name: 'likeUpdate',
+      //   })
+      //   .all();
+
+      //  await page.getByTestId('title').fill(content.title);
+      // const locator = await page.getByText('Show details');
+
+      // await page.getByRole('button', { name: 'Show details' }).click();
+      console.log('showDetails es: ', showDetails);
+    });
   });
 });

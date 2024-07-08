@@ -32,7 +32,9 @@ const Blog = ({ blog, updateLikes, removeBlog, userLoggedIn }) => {
             >
               {blog.url}
             </a>
-            <p className="blog-likes">Likes: {blog.likes} </p>
+            <p className="blog-likes" data-testid="blog-likes">
+              Likes: {blog.likes}
+            </p>
             <button
               className="blog-likes-button"
               style={{ marginLeft: 5 }}
