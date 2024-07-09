@@ -1,6 +1,6 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { voteAnecdote } from "../reducers/anecdotesReducer";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { voteAnecdote } from '../reducers/anecdotesReducer';
 
 const AnecdoteList = () => {
   const dispatch = useDispatch();
