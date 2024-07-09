@@ -31,7 +31,7 @@ const anecdotesReducer = (state = initialState, action) => {
       return state.concat(newFormattedAnecdote);
 
     case "VOTE_ANECDOTE": {
-      const id = action.payload.id;
+      const id = action.payload;
       const anecdoteToVote = state.find((anecdote) => anecdote.id === id);
       const votedAnecdote = {
         ...anecdoteToVote,
@@ -48,17 +48,17 @@ const anecdotesReducer = (state = initialState, action) => {
   }
 };
 
-const voteAnecdote = (id) => {
+const voteAnecdote = (payload) => {
   return {
     type: "VOTE_ANECDOTE",
-    payload: { id },
+    payload,
   };
 };
 
-const addNewAnecdote = (anecdote) => {
+const addNewAnecdote = (payload) => {
   return {
     type: "NEW_ANECDOTE",
-    payload: anecdote,
+    payload,
   };
 };
 
