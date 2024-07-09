@@ -27,7 +27,8 @@ const anecdotesReducer = (state = initialState, action) => {
     case "DO_NOTHING":
       return state;
     case "NEW_ANECDOTE":
-      return state.concat(action.payload.asObject());
+      const newFormattedAnecdote = asObject(action.payload);
+      return state.concat(newFormattedAnecdote);
 
     case "VOTE_ANECDOTE": {
       const id = action.payload.id;
@@ -54,4 +55,11 @@ const voteAnecdote = (id) => {
   };
 };
 
-export { anecdotesReducer, initialState, voteAnecdote };
+const addNewAnecdote = (anecdote) => {
+  return {
+    type: "NEW_ANECDOTE",
+    payload: anecdote,
+  };
+};
+
+export { anecdotesReducer, initialState, voteAnecdote, addNewAnecdote };
