@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { anecdotesFilterChange } from '../reducers/filterReducer';
 
 const Filter = () => {
-  const [filterValue, setFilterValue] = useState('');
+  const dispatch = useDispatch();
 
   const handleFilterChange = (event) => {
-    setFilterValue(event.target.value);
+    dispatch(anecdotesFilterChange(event.target.value.toLowerCase()));
   };
 
   const style = {
@@ -12,9 +14,9 @@ const Filter = () => {
   };
 
   return (
-    <div style={style}>
+    <form style={style}>
       Filter <input onChange={handleFilterChange} />
-    </div>
+    </form>
   );
 };
 

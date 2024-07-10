@@ -14,8 +14,11 @@ const AnecdoteList = () => {
     }
     return 0;
   };
+  const anecdotesFilter = useSelector((state) => state.filter);
 
-  const anecdotes = useSelector((state) => state).sort(compareVotes);
+  const anecdotes = useSelector((state) => state.anecdotes)
+    .sort(compareVotes)
+    .filter((anecdote) => anecdote.content.includes(anecdotesFilter));
 
   const voteThisAnecdote = (id) => {
     dispatch(voteAnecdote(id));
