@@ -26,7 +26,7 @@ const AnecdoteList = () => {
     .sort(compareVotes)
     .filter((anecdote) => anecdote.content.includes(anecdotesFilter));
 
-  const voteThisAnecdote = async (id, content) => {
+  const voteThisAnecdote = (id, content) => {
     dispatch(voteAnecdote(id));
     dispatch(sendNotification(`You voted ${content}`));
 
