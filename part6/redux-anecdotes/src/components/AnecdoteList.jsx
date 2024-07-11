@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { voteAnecdote } from '../reducers/anecdotesReducer';
+import { updateAnecdoteVote, voteAnecdote } from '../reducers/anecdotesReducer';
 import {
   sendNotification,
   clearNotification,
@@ -26,9 +26,9 @@ const AnecdoteList = () => {
     .sort(compareVotes)
     .filter((anecdote) => anecdote.content.includes(anecdotesFilter));
 
-  const voteThisAnecdote = (id, content) => {
-    dispatch(voteAnecdote(id));
-    dispatch(sendNotification(`You voted ${content}`));
+  const voteThisAnecdote = (anecdote) => {
+    dispatch(updateAnecdoteVote(anecdote));
+    dispatch(sendNotification(`You voted ${anecdote.content}`));
 
     setTimeout(() => {
       dispatch(clearNotification());
@@ -42,11 +42,7 @@ const AnecdoteList = () => {
           <div>{anecdote.content}</div>
           <div>
             has {anecdote.votes}
-            <button
-              onClick={() => voteThisAnecdote(anecdote.id, anecdote.content)}
-            >
-              vote
-            </button>
+            <button onClick={() => voteThisAnecdote(anecdote)}>vote</button>
           </div>
         </div>
       ))}
