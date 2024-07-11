@@ -19,4 +19,13 @@ const notificationsSlice = createSlice({
 export const { sendNotification, clearNotification } =
   notificationsSlice.actions;
 
+export const setNotification = (anecdote, delayInSeconds) => {
+  return async (dispatch) => {
+    await dispatch(sendNotification(`You voted ${anecdote.content}`));
+    setTimeout(() => {
+      dispatch(clearNotification());
+    }, delayInSeconds * 1000);
+  };
+};
+
 export default notificationsSlice.reducer;
