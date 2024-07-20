@@ -1,8 +1,25 @@
-import Notification from "./components/Notification";
+import { useReducer } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAnecdotes, createAnecdote, updateAnecdote } from "./requests";
 
+import Notification from "./components/Notification";
+
+const notificationReducer = (state, action) => {
+  switch (action.type) {
+    case "NEW_ANECDOTE":
+      return state + 1;
+    case "VOTED_ANECDOTE":
+      return state - 1;
+    default:
+      return state;
+  }
+};
+
 const App = () => {
+  const [notification, notificationDispatch] = useReducer(
+    notificationReducer,
+    ""
+  );
   const queryClient = useQueryClient();
 
   const newAnecdoteMutation = useMutation({
