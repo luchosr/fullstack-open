@@ -27,7 +27,16 @@ const App = () => {
     kind: "background";
   }
 
-  type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
+  interface CoursePartSpecial extends CoursePartBasicBackground {
+    requirements: string[];
+    kind: "special";
+  }
+
+  type CoursePart =
+    | CoursePartBasic
+    | CoursePartGroup
+    | CoursePartBackground
+    | CoursePartSpecial;
 
   const courseParts: CoursePart[] = [
     {
@@ -61,6 +70,13 @@ const App = () => {
       exerciseCount: 10,
       description: "a hard part",
       kind: "basic",
+    },
+    {
+      name: "Backend development",
+      exerciseCount: 21,
+      description: "Typing the backend",
+      requirements: ["nodejs", "jest"],
+      kind: "special",
     },
   ];
 
