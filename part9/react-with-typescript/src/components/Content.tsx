@@ -1,14 +1,14 @@
 import React from "react";
 
-interface courseInterface {
+interface CourseInterface {
   name: string;
   exerciseCount: number;
 }
-interface contentProps {
-  courses: courseInterface[];
+interface ContentProps {
+  courses: CourseInterface[];
 }
 
-const Content = ({ courses }: contentProps) => {
+const Content = ({ courses }: ContentProps) => {
   return (
     <div>
       {courses.map((course) => (
