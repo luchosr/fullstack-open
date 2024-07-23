@@ -1,11 +1,11 @@
 import React from "react";
 
 interface HeaderPops {
-  courseName: string;
+  name: string;
 }
 
-const Header = ({ courseName }: HeaderPops) => {
-  return <h1>{courseName}</h1>;
+const Header = ({ name }: HeaderPops) => {
+  return <h1>{name}</h1>;
 };
 
 export default Header;
