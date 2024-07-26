@@ -56,7 +56,7 @@ const App = () => {
   return (
     <div>
       <Header name={courseName} />
-      <Content courses={courseParts} />
+      <Content parts={courseParts} />
       <Total totalExercises={totalExercises} />
     </div>
   );
