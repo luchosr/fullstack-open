@@ -1,42 +1,10 @@
 import Content from "./components/Content";
 import Header from "./components/Header";
 import Total from "./components/Total";
+import { CoursePart } from "./types";
 
 const App = () => {
   const courseName = "Half Stack application development";
-  interface CoursePartBase {
-    name: string;
-    exerciseCount: number;
-  }
-
-  interface CoursePartBasicBackground extends CoursePartBase {
-    description: string;
-  }
-
-  interface CoursePartBasic extends CoursePartBasicBackground {
-    kind: "basic";
-  }
-
-  interface CoursePartGroup extends CoursePartBase {
-    groupProjectCount: number;
-    kind: "group";
-  }
-
-  interface CoursePartBackground extends CoursePartBasicBackground {
-    backgroundMaterial: string;
-    kind: "background";
-  }
-
-  interface CoursePartSpecial extends CoursePartBasicBackground {
-    requirements: string[];
-    kind: "special";
-  }
-
-  type CoursePart =
-    | CoursePartBasic
-    | CoursePartGroup
-    | CoursePartBackground
-    | CoursePartSpecial;
 
   const courseParts: CoursePart[] = [
     {
