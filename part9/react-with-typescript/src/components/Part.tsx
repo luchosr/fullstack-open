@@ -1,4 +1,3 @@
-import React from "react";
 import { CoursePart } from "../types";
 
 const assertNever = (value: never): never => {
@@ -7,40 +6,46 @@ const assertNever = (value: never): never => {
   );
 };
 
-const Part: React.FC<{ part: CoursePart }> = ({ part }) => {
-  switch (part.name) {
-    case "Fundamentals":
+interface PartProps {
+  part: CoursePart;
+}
+
+const Part = ({ part }: PartProps) => {
+  switch (part.kind) {
+    case "basic":
       return (
         <div>
-          <p>Name: {part.name} </p>
+          <h3>{part.name}</h3>
           <p>exercise count: {part.exerciseCount} </p>
           <p>description: {part.description}</p>
         </div>
       );
-    case "Using props to pass data":
+    case "group":
       return (
         <div>
-          <p>Name: {part.name} </p>
+          <h3>{part.name}</h3>
           <p>exercise count: {part.exerciseCount}</p>
           <p>groupProjectCount: {part.groupProjectCount}</p>
         </div>
       );
-    case "Deeper type usage":
+    case "background":
       return (
         <div>
-          <p>Name: {part.name}</p>
+          <h3>{part.name}</h3>
           <p>exercise count: {part.exerciseCount}</p>
           <p>description: {part.description}</p>
-          <p>exerciseSubmissionLink: {part.exerciseSubmissionLink}</p>
+          <p>background Material: {part.backgroundMaterial}</p>
         </div>
       );
-    case "Typescript is great":
+    case "special":
       return (
         <div>
-          <p>Name: {part.name}</p>
+          <h3>{part.name}</h3>
           <p>exercise count: {part.exerciseCount}</p>
           <p>description: {part.description}</p>
-          <p>instructor {part.instructor}</p>
+          <p>
+            requirements: {part.requirements[0]} {part.requirements[1]}
+          </p>
         </div>
       );
     default:
