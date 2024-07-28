@@ -7,3 +7,8 @@ export interface Note {
 
 // https://platzi.com/clases/2879-typescript-tipos-avanzados/47318-omit-pick-type/
 export type NewNote = Omit<Note, "id">;
+
+export enum NotesAppText {
+  Remove = "Remove",
+  Add = "Add",
+}
