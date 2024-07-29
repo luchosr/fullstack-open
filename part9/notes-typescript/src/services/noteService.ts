@@ -10,3 +10,7 @@ export const getAllNotes = () => {
 export const createNote = (object: NewNote) => {
   return axios.post<Note>(baseUrl, object).then((response) => response.data);
 };
+
+export const removeNote = (noteToRemove: Note) => {
+  return axios.delete<Note>(`${baseUrl}/${noteToRemove.id}`);
+};

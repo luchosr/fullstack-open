@@ -1,4 +1,4 @@
-import { getAllNotes, createNote } from "./services/noteService";
+import { getAllNotes, createNote, removeNote } from "./services/noteService";
 import { useEffect, useState } from "react";
 import { Note, NotesAppText } from "./types";
 
@@ -21,7 +21,11 @@ const App = () => {
   };
 
   const noteRemoval = (noteToRemove: Note) => {
-    console.log("la note es: ", noteToRemove);
+    removeNote(noteToRemove).then(() =>
+      getAllNotes().then((data) => {
+        setNotes(data);
+      })
+    );
   };
 
   return (
@@ -36,7 +40,7 @@ const App = () => {
       <ul>
         {notes.map((note) => (
           <li key={note.id}>
-            {note.content}{" "}
+            {note.content}
             <button type="button" onClick={() => noteRemoval(note)}>
               {NotesAppText.Remove}
             </button>
