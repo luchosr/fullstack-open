@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev index.ts",
     "lint": "eslint --ext .ts .",
+    "start": "node build/index.js",
     "tsc": "tsc"
   },
   "author": "",
@@ -19,6 +20,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   }
 }
