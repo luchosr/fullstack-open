@@ -13,4 +13,8 @@ export interface Patient {
   occupation: string;
 }
 
-export type Gender = "male" | "female" | "other";
+export enum Gender {
+  Male = "male",
+  Female = "female",
+  Other = "other",
+}
