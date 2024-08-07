@@ -1,8 +1,10 @@
 import { Gender, Patient } from "./types";
 
-export const toNewPatientEntry = (object: unknown): Patient => {
+export const toNewPatientEntry = (object: Patient | unknown): Patient => {
+  if (!object || typeof object !== "object") {
+    throw new Error("Incorrect or missing data");
+  }
   const newPatientEntry: Patient = {
-    id: "d2773336-f723-11e9-8f0b-362b9e155667",
     name: parseName(object.name),
     dateOfBirth: parseDate(object.date),
     ssn: "090786-122X",
