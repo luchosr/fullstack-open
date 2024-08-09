@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { NonSensitiveDiaryEntry } from './types';
-import { getNonSensitiveDiaryEntries } from './services/diaryServices';
+import { DiaryEntry } from './types';
+import { getDairyEntries } from './services/diaryServices';
 
 function App() {
-  const [diaries, setDiaries] = useState<NonSensitiveDiaryEntry[]>([]);
+  const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
 
   useEffect(() => {
-    getNonSensitiveDiaryEntries().then((data) => {
+    getDairyEntries().then((data) => {
       setDiaries(data);
     });
   }, []);
@@ -20,6 +20,7 @@ function App() {
               <h4>{diary.date}</h4>
               <div className="">Visibility: {diary.visibility}</div>
               <div>Weather: {diary.weather}</div>
+              <div>Comment: {diary.comment}</div>
             </li>
           ))}
         </ul>
